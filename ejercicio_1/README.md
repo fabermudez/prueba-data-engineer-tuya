@@ -103,4 +103,4 @@ Deployment Pipelines de Fabric, que actúan como la etapa de CD.
 - Se asume que existe un identificador único de cliente consistente entre todas las
   fuentes (maestro de clientes).
 - Se asume que el equipo de datos tiene autoridad para definir el formato estándar
-  final del teléfono (E.164).
+  final del teléfono.
