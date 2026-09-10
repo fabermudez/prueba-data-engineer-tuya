@@ -49,7 +49,7 @@ flowchart TD
     subgraph Consumo["Consumo"]
         E1[Servicio al cliente]
         E2[Marketing / Comunicaciones]
-        E3[KPIs de calidad<br/>(Ejercicio 2)]
+        E3["KPIs de calidad (Ejercicio 2)"]
     end
 
     A1 & A2 & A3 & A4 --> B
