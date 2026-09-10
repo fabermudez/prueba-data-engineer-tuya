@@ -1,0 +1,24 @@
+# Bases de datos generadas (reproducibles con 01_crear_y_cargar_db.py)
+*.db
+*.sqlite
+*.sqlite3
+
+# Resultados generados (reproducibles con 02_ejecutar_rachas.py)
+*.csv
+
+# HTML generados por el ejercicio 4 (reproducibles con html_image_embedder.py)
+*_base64.html
+*_base64.htm
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Entornos / IDE
+.vscode/
+.idea/
+.DS_Store
