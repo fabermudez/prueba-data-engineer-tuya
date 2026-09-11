@@ -2,15 +2,19 @@
 Ejecuta rachas.sql contra la base de datos, parametrizado por fecha_base y n.
 
 Uso:
-    python 02_ejecutar_rachas.py <fecha_base:YYYY-MM-DD> <n> [ruta_db] [salida.csv]
+    python 02_ejecutar_rachas.py <fecha_base:YYYY-MM-DD> <n> [ruta_db] [salida]
 
-Ejemplo:
+El formato de salida se infiere de la extensión del archivo: .xlsx o .csv.
+
+Ejemplos:
+    python 02_ejecutar_rachas.py 2024-12-31 3 rachas.db resultado.xlsx
     python 02_ejecutar_rachas.py 2024-12-31 3 rachas.db resultado.csv
 """
-import csv
 import sqlite3
 import sys
 from pathlib import Path
+
+import pandas as pd
 
 
 def ejecutar_rachas(db_path: str, fecha_base: str, n: int):
@@ -44,11 +48,22 @@ def main() -> None:
         print(f"... ({len(filas) - 15} filas más)")
 
     if salida:
-        with open(salida, "w", newline="", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            writer.writerow(columnas)
-            writer.writerows(filas)
+        exportar(columnas, filas, salida)
         print(f"\nResultado exportado a {salida}")
+
+
+def exportar(columnas, filas, salida: str) -> None:
+    ruta_salida = Path(salida)
+    df = pd.DataFrame(filas, columns=columnas)
+
+    if ruta_salida.suffix.lower() == ".xlsx":
+        df.to_excel(ruta_salida, index=False, sheet_name="rachas")
+    elif ruta_salida.suffix.lower() == ".csv":
+        df.to_csv(ruta_salida, index=False, encoding="utf-8")
+    else:
+        raise ValueError(
+            f"Extensión de salida no soportada: '{ruta_salida.suffix}'. Usa .xlsx o .csv"
+        )
 
 
 if __name__ == "__main__":
